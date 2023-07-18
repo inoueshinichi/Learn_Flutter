@@ -1,6 +1,9 @@
 # Learn_Flutter
 Learning Flutter cross-platform mobile development
 
-This repogitry includes some flutter projects.
+## Version
++ Flutter stable 3.7.3
+
+## This repogitry includes some flutter projects.
 
 
