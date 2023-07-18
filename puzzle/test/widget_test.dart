@@ -11,20 +11,59 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:puzzle/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  //   // Build our app and trigger a frame.
+  //   await tester.pumpWidget(const MyApp());
+
+  //   // Verify that our counter starts at 0.
+  //   expect(find.text('0'), findsOneWidget);
+  //   expect(find.text('1'), findsNothing);
+
+  //   // Tap the '+' icon and trigger a frame.
+  //   await tester.tap(find.byIcon(Icons.add));
+  //   await tester.pump();
+
+  //   // Verify that our counter has incremented.
+  //   expect(find.text('0'), findsNothing);
+  //   expect(find.text('1'), findsOneWidget);
+  // });
+
+  testWidgets('スタート画面が表示される', (WidgetTester tester) async {
+    // ここにテストの内容を書く
+
+    // MyAppを読み込む
+    await tester.binding.setSurfaceSize(const Size(400, 800)); // 画面サイズを指定
     await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // 特定のWidgetが表示されていることを確認する
+    // final titleFinder = find.text('スライドパズル');
+    final titleFinder = find.text('ABCパズル'); // 故意にテストエラーを出す
+    final buttonFinder = find.text('スタート');
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // 特定したWidgetが1つだけ存在することを確認する
+    expect(titleFinder, findsOneWidget);
+    expect(buttonFinder, findsOneWidget);
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
+  testWidgets('スタートボタンをタップするとパズル画面が表示される', (WidgetTester tester) async {
+    // MyAppを読み込む
+    await tester.binding.setSurfaceSize(const Size(400, 800));
+    await tester.pumpWidget(const MyApp());
+
+    await tester.tap(find.text('スタート'));
+    await tester.pumpAndSettle(); // Widgetの状態が更新,表示されるのを待つ
+
+    // パズル番号[1-8]が存在するかチェック
     expect(find.text('1'), findsOneWidget);
+    expect(find.text('2'), findsOneWidget);
+    expect(find.text('3'), findsOneWidget);
+    expect(find.text('4'), findsOneWidget);
+    expect(find.text('5'), findsOneWidget);
+    expect(find.text('6'), findsOneWidget);
+    expect(find.text('7'), findsOneWidget);
+    expect(find.text('8'), findsOneWidget);
+
+    // シャッフルボタンが存在するかチェック
+    expect(find.text('シャッフル'), findsOneWidget);
   });
 }
