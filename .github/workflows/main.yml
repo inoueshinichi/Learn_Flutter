@@ -11,7 +11,7 @@ jobs:
       - run: flutter test
       
   build-android:
-    neets: test
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -59,15 +59,15 @@ jobs:
         security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
         
         # 証明書をkeychainにインポート
-        echo -n "$CERTIFICATE_P12" | base64 --decode > $SERTIFICATE_PATH
-        security import $CERTIFICATE_PATH -P "$CERTIFICATE_P12_PASSWORD" -A -t cert -f pkgs12 -k $KEYCHAIN_PATH
+        echo -n "$CERTIFICATE_P12" | base64 --decode > $CERTIFICATE_PATH
+        security import $CERTIFICATE_PATH -P "$CERTIFICATE_P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
         security list-keychain -d user -s $KEYCHAIN_PATH
       env:
         CERTIFICATE_P12: ${{ secrets.CERTIFICATE_P12 }}
         CERTIFICATE_P12_PASSWORD: ${{ secrets.CERTIFICATE_P12_PASSWORD }}
       - run: |
         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-        echo -n "$PROFISION_PROFILE" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/build.mobileprovision
+        echo -n "$PROVISION_PROFILE" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/build.mobileprovision
       env:
         PROVISION_PROFILE: ${{ secrets.PROVISION_PROFILE }}
       - run: flutter build ipa --export-option-plist=ios/ExportOptions.plist
@@ -87,7 +87,7 @@ jobs:
       - run: firebase appdistribution:distribute app-release.apk --app $APP_ID --groups $TESTER_GROUP
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          APP_ID: 1:xxxxxxxxxx:android:xxxxxxxxxx
+          APP_ID: 1:13957873450:android:32f21b3497be1649326853
           TESTER_GROUP: puzzleapp-tester-group
           
   deploy-ios:
