@@ -2,7 +2,8 @@
 Learning Flutter cross-platform mobile development
 
 ## Version
-+ Flutter stable 3.7.3
++ Flutter: 3.7.3 (stable)
++ Dart: 2.19.2 (stable)
 
 ## This repogitry includes some flutter projects.
 
