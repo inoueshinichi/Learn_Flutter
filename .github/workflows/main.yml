@@ -27,7 +27,7 @@ jobs:
         with:
           java-version: '12.x'
       - name: Make keystore and properties
-        run: 
+        run: |
           KEYSTORE_PATH=$RUNNER_TEMP/keystore.jks
           echo -n $KEYSTORE | base64 --decode > $KEYSTORE_PATH
   
