@@ -1,4 +1,4 @@
-name: Flutter CI/CD
+name: Flutter PuzzleApp CI/CD
 on: 
 # [push]
   push:
@@ -7,9 +7,8 @@ jobs:
   cd-puzzle:
     runs-on: ubuntu-latest
     steps:
-      - uses: action/checkout@v2
       - run: cd ./puzzle
-      
+
   test:
     needs: cd-puzzle
     runs-on: ubuntu-latest
