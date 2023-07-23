@@ -13,35 +13,35 @@ jobs:
           channel: 'stable'
       - run: flutter test
       
-  build-android:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-      - uses: actions/setup-java@v1
-        with:
-          java-version: '12.x'
-      - run: |
-        KEYSTORE_PATH=$RUNNER_TEMP/keystore.jks
-        echo -n $KEYSTORE | base64 --decode > $KEYSTORE_PATH
+#   build-android:
+#     needs: test
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: subosito/flutter-action@v2
+#         with:
+#           channel: 'stable'
+#       - uses: actions/setup-java@v1
+#         with:
+#           java-version: '12.x'
+#       - run: |
+#         KEYSTORE_PATH=$RUNNER_TEMP/keystore.jks
+#         echo -n $KEYSTORE | base64 --decode > $KEYSTORE_PATH
         
-        KEY_PROPERTIES_PATH=android/key.properties
-        echo "storePassword=$STORE_PASSWORD" >> $KEY_PROPERTIES_PATH
-        echo "keyPassword=$KEY_PASSWORD"     >> $KEY_PROPERTIES_PATH
-        echo "keyAlias=alias"                >> $KEY_PROPERTIES_PATH
-        echo "storeFile=$KEYSTORE_PATH"      >> $KEY_PROPERTIES_PATH
-      env:
-        KEYSTORE: ${{ secrets.KEYSTORE }}
-        STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
-        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-      - run: flutter build apk
-      - uses: actions/upload-artifact@v2
-        with:
-          name: apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+#         KEY_PROPERTIES_PATH=android/key.properties
+#         echo "storePassword=$STORE_PASSWORD" >> $KEY_PROPERTIES_PATH
+#         echo "keyPassword=$KEY_PASSWORD"     >> $KEY_PROPERTIES_PATH
+#         echo "keyAlias=alias"                >> $KEY_PROPERTIES_PATH
+#         echo "storeFile=$KEYSTORE_PATH"      >> $KEY_PROPERTIES_PATH
+#       env:
+#         KEYSTORE: ${{ secrets.KEYSTORE }}
+#         STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+#         KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+#       - run: flutter build apk
+#       - uses: actions/upload-artifact@v2
+#         with:
+#           name: apk
+#           path: build/app/outputs/flutter-apk/app-release.apk
           
   build-ios:
     needs: test
@@ -79,19 +79,19 @@ jobs:
           name: ipa
           path: build/ios/ipa/puzzleapp.ipa
   
-  deploy-android:
-    needs: build-android
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: apk
-      - run: curl -sL https://firbase.tools | bash
-      - run: firebase appdistribution:distribute app-release.apk --app $APP_ID --groups $TESTER_GROUP
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          APP_ID: 1:13957873450:android:32f21b3497be1649326853
-          TESTER_GROUP: puzzleapp-tester-group
+#   deploy-android:
+#     needs: build-android
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/download-artifact@v2
+#         with:
+#           name: apk
+#       - run: curl -sL https://firbase.tools | bash
+#       - run: firebase appdistribution:distribute app-release.apk --app $APP_ID --groups $TESTER_GROUP
+#         env:
+#           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+#           APP_ID: 1:13957873450:android:32f21b3497be1649326853
+#           TESTER_GROUP: puzzleapp-tester-group
           
   deploy-ios:
     needs: build-ios
