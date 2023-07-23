@@ -6,12 +6,12 @@
 __pycache__/
 
 # Flutter Project's product folders
-build/
+# build/
 # android/
 # ios/
-linux/
-macos/
-web/
-windows/
+# linux/
+# macos/
+# web/
+# windows/
 
 
