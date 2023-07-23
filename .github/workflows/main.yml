@@ -3,6 +3,12 @@ on:
 # [push]
   push:
     branches: [ main ]
+
+defaults:
+  run:
+    # ワークフローの作業ディレクトリをpuzzleに変更
+    working-directory: ./puzzle
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -13,8 +19,7 @@ jobs:
           channel: 'stable'
       - name: Flutter Test
         run: flutter test
-        working-directory: ./puzzle
-      
+        
   build-android:
     needs: test
     runs-on: ubuntu-latest
@@ -36,14 +41,12 @@ jobs:
           echo "keyPassword=$KEY_PASSWORD"     >> $KEY_PROPERTIES_PATH
           echo "keyAlias=alias"                >> $KEY_PROPERTIES_PATH
           echo "storeFile=$KEYSTORE_PATH"      >> $KEY_PROPERTIES_PATH
-        working-directory: ./puzzle
         env:
           KEYSTORE: ${{ secrets.KEYSTORE }}
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
       - name: Build android and generate apk file
         run: flutter build apk
-        working-directory: ./puzzle
       - uses: actions/upload-artifact@v2
         with:
           name: apk
@@ -72,7 +75,6 @@ jobs:
           echo -n "$CERTIFICATE_P12" | base64 --decode > $CERTIFICATE_PATH
           security import $CERTIFICATE_PATH -P "$CERTIFICATE_P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
           security list-keychain -d user -s $KEYCHAIN_PATH
-        working-directory: ./puzzle
         env:
           CERTIFICATE_P12: ${{ secrets.CERTIFICATE_P12 }}
           CERTIFICATE_P12_PASSWORD: ${{ secrets.CERTIFICATE_P12_PASSWORD }}
@@ -102,7 +104,6 @@ jobs:
         run: |
           curl -sL https://firbase.tools | bash
           firebase appdistribution:distribute app-release.apk --app $APP_ID --groups $TESTER_GROUP
-        working-directory: ./puzzle
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           APP_ID: 1:13957873450:android:32f21b3497be1649326853
@@ -119,7 +120,6 @@ jobs:
         run: |
           curl -sL https://firebase.tools | bash
           firebase appdistribution:distribute puzzleapp.ipa --app $APP_ID --groups $TESTER_GROUP
-        working-directory: ./puzzle
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           APP_ID: 1:13957873450:ios:5cafb2feaf0a3b1e326853
