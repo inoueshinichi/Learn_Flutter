@@ -7,8 +7,8 @@ __pycache__/
 
 # Flutter Project's product folders
 build/
-android/
-ios/
+# android/
+# ios/
 linux/
 macos/
 web/

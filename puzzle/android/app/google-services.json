@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "13957873450",
+    "project_id": "puzzleapp-58ec5",
+    "storage_bucket": "puzzleapp-58ec5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13957873450:android:32f21b3497be1649326853",
+        "android_client_info": {
+          "package_name": "com.shinichi.inoue.puzzleapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13957873450-455v2dnjeaal5idbosjbkfk4kir4to72.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHuAouOpAVURv1v7bD_T4U4MuHbqTZnWk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13957873450-455v2dnjeaal5idbosjbkfk4kir4to72.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "13957873450-km6bvok79rqnrdlppcvid44ubgna2pq8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shinichi.inoue.puzzleapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
