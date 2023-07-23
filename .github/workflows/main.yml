@@ -88,7 +88,7 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           APP_ID: 1:xxxxxxxxxx:android:xxxxxxxxxx
-          TESTER_GROUP: my-test-group
+          TESTER_GROUP: puzzleapp-tester-group
           
   deploy-ios:
     needs: build-ios
@@ -102,5 +102,5 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           APP_ID: 1:13957873450:ios:5cafb2feaf0a3b1e326853
-          TESTER_GROUP: my-test-group
+          TESTER_GROUP: puzzleapp-tester-group
           
