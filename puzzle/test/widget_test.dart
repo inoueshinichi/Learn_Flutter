@@ -36,8 +36,8 @@ void main() {
     await tester.pumpWidget(const MyApp());
 
     // 特定のWidgetが表示されていることを確認する
-    // final titleFinder = find.text('スライドパズル');
-    final titleFinder = find.text('ABCパズル'); // 故意にテストエラーを出す
+    final titleFinder = find.text('スライドパズル');
+    // final titleFinder = find.text('ABCパズル'); // 故意にテストエラーを出す
     final buttonFinder = find.text('スタート');
 
     // 特定したWidgetが1つだけ存在することを確認する
