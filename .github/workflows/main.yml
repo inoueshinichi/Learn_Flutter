@@ -84,9 +84,6 @@ jobs:
           echo -n "$CERTIFICATE_P12" | base64 --decode > $CERTIFICATE_PATH
           security import $CERTIFICATE_PATH -P "$CERTIFICATE_P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
           security list-keychain -d user -s $KEYCHAIN_PATH
-
-          # CocoaPadのインストール
-          pod repo add
         env:
           CERTIFICATE_P12: ${{ secrets.CERTIFICATE_P12 }}
           CERTIFICATE_P12_PASSWORD: ${{ secrets.CERTIFICATE_P12_PASSWORD }}
