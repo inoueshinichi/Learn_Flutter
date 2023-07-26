@@ -52,7 +52,7 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
       - name: Build and generate apk archive for android
         run: flutter build apk
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: apk
           path: build/app/outputs/flutter-apk/app-release.apk
@@ -97,7 +97,7 @@ jobs:
       - name: Build and generate ipa archive for ios
         # shell: bash
         run: flutter build ipa --export-options-plist=ios/ExportOptions.plist
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: ipa
           path: build/ios/ipa/puzzleapp.ipa
@@ -108,7 +108,7 @@ jobs:
     environment:
       name: PuzzleAppEnv
     steps:
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: apk
       - name: Get firebase token
@@ -127,7 +127,7 @@ jobs:
     environment:
       name: PuzzleAppEnv
     steps:
-      - uses: action/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: ipa
       - name: Get firebase token
