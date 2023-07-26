@@ -111,6 +111,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: apk
+          path: build/app/outputs/flutter-apk/app-release.apk
       - name: Get firebase token
         shell: bash
         run: |
@@ -130,6 +131,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: ipa
+          path: build/ios/ipa/puzzleapp.ipa
       - name: Get firebase token
         shell: bash
         run: |
