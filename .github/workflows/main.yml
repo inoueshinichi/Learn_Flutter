@@ -12,9 +12,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.7.3'
           channel: 'stable'
       - name: Flutter Test
         shell: bash
@@ -24,9 +25,10 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.7.3'
           channel: 'stable'
       - uses: actions/setup-java@v1
         with:
@@ -57,12 +59,13 @@ jobs:
     needs: test
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.7.3'
           channel: 'stable'
       - name: Make keychain and import certificate
-        shell: zsh
+        shell: bash
         run: |
           KEYCHAIN_PASSWORD=$(node -p "Math.random().toString(36)")
           KEYCHAIN_PATH=$RUNNER_TEMP/build.keychain
@@ -81,14 +84,14 @@ jobs:
           CERTIFICATE_P12: ${{ secrets.CERTIFICATE_P12 }}
           CERTIFICATE_P12_PASSWORD: ${{ secrets.CERTIFICATE_P12_PASSWORD }}
       - name: Make provisioning profile
-        shell: zsh
+        shell: bash
         run: |
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           echo -n "$PROVISION_PROFILE" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/build.mobileprovision
         env:
           PROVISION_PROFILE: ${{ secrets.PROVISION_PROFILE }}
       - name: Build and generate ipa archive for ios
-        shell: zsh
+        shell: bash
         run: flutter build ipa --export-options-plist=ios/ExportOptions.plist
       - uses: actions/upload-artifact@v2
         with:
@@ -120,7 +123,7 @@ jobs:
         with:
           name: ipa
       - name: Get firebase token
-        shell: zsh
+        shell: bash
         run: |
           curl -sL https://firebase.tools | bash
           firebase appdistribution:distribute puzzleapp.ipa --app $APP_ID --groups $TESTER_GROUP
