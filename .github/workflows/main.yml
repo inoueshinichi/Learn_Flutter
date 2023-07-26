@@ -44,7 +44,7 @@ jobs:
           KEY_PROPERTIES_PATH=android/key.properties
           echo "storePassword=$STORE_PASSWORD" >> $KEY_PROPERTIES_PATH
           echo "keyPassword=$KEY_PASSWORD"     >> $KEY_PROPERTIES_PATH
-          echo "keyAlias=alias"                >> $KEY_PROPERTIES_PATH
+          echo "keyAlias=puzzle"               >> $KEY_PROPERTIES_PATH
           echo "storeFile=$KEYSTORE_PATH"      >> $KEY_PROPERTIES_PATH
         env:
           KEYSTORE: ${{ secrets.KEYSTORE }}
