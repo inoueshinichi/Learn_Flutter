@@ -5,6 +5,8 @@ Learning Flutter cross-platform mobile development
 + Flutter: 3.7.3 (stable)
 + Dart: 2.19.2 (stable)
 + Firebase-tools: 12.4.5
++ Android SDK > 23
++ iOS SKD > 16
 
 ## This repogitry includes some flutter projects.
 
