@@ -8,10 +8,11 @@ Learning Flutter cross-platform mobile development
 + iOS SKD > 16
 
 ## Dart Library Version
-+ 
++ shared_preferences: 2.2.0
 
-## Other Library Version
+## Firebase Version
 + Firebase-tool: 12.4.5 (Must Android SDK > 19)
++ 
 
 ## This repogitry includes some flutter projects.
 
