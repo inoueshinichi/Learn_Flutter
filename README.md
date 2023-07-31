@@ -12,8 +12,10 @@ Learning Flutter cross-platform mobile development
 
 ## Firebase Version
 + Firebase-tool: 12.4.5 (Must Android SDK > 19)
-+ 
++ Firebase-core: 2.15.0
++ Firebase-cloud_store: 4.8.3
 
 ## This repogitry includes some flutter projects.
++ puzzle
 
 
