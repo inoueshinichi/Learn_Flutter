@@ -17,6 +17,5 @@ Learning Flutter cross-platform mobile development
 
 ## This repogitry includes some flutter projects.
 + puzzle
-+ dart_tutorial
 
 
