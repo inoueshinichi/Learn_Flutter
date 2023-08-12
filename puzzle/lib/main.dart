@@ -52,7 +52,7 @@ class StartPage extends StatelessWidget {
   void showPuzzlePage(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const PuzzlePage()),
+      MaterialPageRoute<PuzzlePage>(builder: (context) => const PuzzlePage()),
     );
   }
 }
@@ -187,7 +187,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
     final value = prefs.getString('TILE_NUMBERS');
     if (value != null) {
       final numbers =
-          (jsonDecode(value) as List<dynamic>).map((v) => v as int).toList();
+          (jsonDecode(value) as List<dynamic>).map((dynamic v) => v as int).toList();
       setState(() {
         tileNumbers = numbers;
       });

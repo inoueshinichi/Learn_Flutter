@@ -24,22 +24,23 @@
             "type": "dart",
             "flutterMode": "release"
         },
+
         {
-            "name": "test_project",
-            "cwd": "test_project",
+            "name": "widget_collections",
+            "cwd": "widget_collections",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "test_project (profile mode)",
-            "cwd": "test_project",
+            "name": "widget_collections (profile mode)",
+            "cwd": "widget_collections",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "test_project (release mode)",
-            "cwd": "test_project",
+            "name": "widget_collections (release mode)",
+            "cwd": "widget_collections",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
