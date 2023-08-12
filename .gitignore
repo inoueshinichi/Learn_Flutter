@@ -14,12 +14,4 @@ __pycache__/
 # web/
 # windows/
 
-# Dart tutorial project
-dart_tutorial/build/
-dart_tutorial/android/
-dart_tutorial/ios/
-dart_tutorial/linux/
-dart_tutorial/macos/
-dart_tutorial/web/
-dart_tutorial/windows/
 
