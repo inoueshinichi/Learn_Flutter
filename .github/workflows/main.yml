@@ -139,6 +139,7 @@ jobs:
 
           # Distribute app with firebase
           firebase appdistribution:distribute app-release.apk --app $APP_ID --groups $TESTER_GROUP
+
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           APP_ID: 1:13957873450:android:32f21b3497be1649326853
@@ -166,6 +167,7 @@ jobs:
 
           # Distribute app with firebase
           firebase appdistribution:distribute puzzle.ipa --app $APP_ID --groups $TESTER_GROUP
+          
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           APP_ID: 1:13957873450:ios:5cafb2feaf0a3b1e326853
