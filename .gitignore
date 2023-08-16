@@ -5,13 +5,7 @@
 # Python
 __pycache__/
 
-# Flutter Project's product folders
-# build/
-# android/
-# ios/
-# linux/
-# macos/
-# web/
-# windows/
-
+# Firebase
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
 

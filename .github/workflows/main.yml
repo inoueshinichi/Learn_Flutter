@@ -24,8 +24,8 @@ jobs:
   build-android:
     needs: test
     runs-on: ubuntu-latest
-    environment:
-      name: PuzzleAppEnv
+    # environment:
+    #   name: PuzzleAppEnv
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
@@ -55,15 +55,15 @@ jobs:
       - name: Upload archive production artifacts for android
         uses: actions/upload-artifact@v3
         with:
-          name: apk
+          name: android-apk
           path: build/app/outputs/flutter-apk/app-release.apk
-          retention-days: 5 # 5日の期限
+          retention-days: 7 # 7日の期限
           
   build-ios:
     needs: test
     runs-on: macos-latest
-    environment:
-      name: PuzzleAppEnv
+    # environment:
+    #   name: PuzzleAppEnv
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
@@ -102,20 +102,20 @@ jobs:
       - name: Upload archive production artifacts for ios
         uses: actions/upload-artifact@v3
         with:
-          name: ipa
+          name: ios-ipa
           path: build/ios/ipa/puzzle.ipa
-          retention-days: 5 # 5日の期限
+          retention-days: 7 # 7日の期限
   
   deploy-android:
     needs: build-android
     runs-on: ubuntu-latest
-    environment:
-      name: PuzzleAppEnv
+    # environment:
+    #   name: PuzzleAppEnv
     steps:
       - name: Download archive production artifacts for android
         uses: actions/download-artifact@v3  
         with:
-          name: apk
+          name: android-apk
       - name: Get firebase token
         shell: bash
         run: |
@@ -129,13 +129,13 @@ jobs:
   deploy-ios:
     needs: build-ios
     runs-on: macos-latest
-    environment:
-      name: PuzzleAppEnv
+    # environment:
+    #   name: PuzzleAppEnv
     steps:
       - name: Download archive production artifacts for ios
         uses: actions/download-artifact@v3
         with:
-          name: ipa
+          name: ios-ipa
       - name: Get firebase token
         shell: bash
         run: |
