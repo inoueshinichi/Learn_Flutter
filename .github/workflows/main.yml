@@ -118,6 +118,9 @@ jobs:
       - name: Get firebase token
         # shell: bash
         run: |
+          # Check working-directory
+          pwd
+          
           # Install firebase
           curl -sL https://firbase.tools | bash
 
@@ -141,6 +144,9 @@ jobs:
       - name: Get firebase token
         # shell: bash
         run: |
+          # Check working-directory
+          pwd
+
           # Install Firebase
           curl -sL https://firebase.tools | bash
 
