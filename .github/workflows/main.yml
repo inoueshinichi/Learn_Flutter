@@ -2,7 +2,6 @@ name: Flutter PuzzleApp CI/CD
 on: [push]
   # push:
     # branches: [ main ]
-
 defaults:
   run:
     # ワークフローの作業ディレクトリをpuzzleに変更
