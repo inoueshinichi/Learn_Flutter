@@ -55,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: android-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: puzzle/build/app/outputs/flutter-apk/app-release.apk
           retention-days: 7 # 7日の期限
           
   build-ios:
@@ -102,7 +102,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ios-ipa
-          path: build/ios/ipa/puzzle.ipa
+          path: puzzle/build/ios/ipa/puzzle.ipa
           retention-days: 7 # 7日の期限
   
   deploy-android:
