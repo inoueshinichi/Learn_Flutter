@@ -25,11 +25,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
-// Loading keystore
+// キーストアの設定(1)
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile));
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
 android {
@@ -66,9 +66,9 @@ android {
     //         // Signing with the debug keys for now, so `flutter run --release` works.
     //         signingConfig signingConfigs.debug
     //     }
-    //  }
+    // }
 
-    // Loading keystore
+    // キーストアの設定(2)
     signingConfigs {
         release {
             keyAlias keystoreProperties['keyAlias']
@@ -78,12 +78,13 @@ android {
         }
     }
 
+    // キーストアの設定(3)
     buildTypes {
         release {
-            signingConfig signingConfigs.release // release
+            signingConfig signingConfigs.release
         }
-    } 
-   
+    }
+
 }
 
 flutter {
