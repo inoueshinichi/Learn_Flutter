@@ -116,9 +116,12 @@ jobs:
         with:
           name: android-apk
       - name: Get firebase token
-        shell: bash
+        # shell: bash
         run: |
-          curl -sL https://firbase.tools | bash
+          # Install firebase
+          curl -sL https://firbase.tools
+
+          # Distribute app with firebase
           firebase appdistribution:distribute app-release.apk --app $APP_ID --groups $TESTER_GROUP
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
@@ -136,10 +139,13 @@ jobs:
         with:
           name: ios-ipa
       - name: Get firebase token
-        shell: bash
+        # shell: bash
         run: |
-          curl -sL https://firebase.tools | bash
-          firebase appdistribution:distribute puzzleapp.ipa --app $APP_ID --groups $TESTER_GROUP
+          # Install Firebase
+          curl -sL https://firebase.tools
+
+          # Distribute app with firebase
+          firebase appdistribution:distribute puzzle.ipa --app $APP_ID --groups $TESTER_GROUP
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           APP_ID: 1:13957873450:ios:5cafb2feaf0a3b1e326853
