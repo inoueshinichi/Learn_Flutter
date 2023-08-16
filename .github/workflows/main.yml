@@ -5,7 +5,7 @@ on: [push]
 defaults:
   run:
     # ワークフローの作業ディレクトリをpuzzleに変更
-    working-directory: ./puzzle
+    working-directory: puzzle
 
 jobs:
   test:
