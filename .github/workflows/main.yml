@@ -119,7 +119,7 @@ jobs:
         # shell: bash
         run: |
           # Install firebase
-          curl -sL https://firbase.tools
+          curl -sL https://firbase.tools | bash
 
           # Distribute app with firebase
           firebase appdistribution:distribute app-release.apk --app $APP_ID --groups $TESTER_GROUP
@@ -142,7 +142,7 @@ jobs:
         # shell: bash
         run: |
           # Install Firebase
-          curl -sL https://firebase.tools
+          curl -sL https://firebase.tools | bash
 
           # Distribute app with firebase
           firebase appdistribution:distribute puzzle.ipa --app $APP_ID --groups $TESTER_GROUP
