@@ -135,7 +135,7 @@ jobs:
           echo "${{ github.workspace }}"
 
           # Install firebase
-          curl -sL https://firbase.tools | bash
+          curl -sL https://firebase.tools | bash
 
           # Distribute app with firebase
           firebase appdistribution:distribute app-release.apk --app $APP_ID --groups $TESTER_GROUP
