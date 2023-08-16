@@ -2,14 +2,18 @@ name: Flutter PuzzleApp CI/CD
 on: [push]
   # push:
     # branches: [ main ]
-defaults:
-  run:
-    # ワークフローの作業ディレクトリをpuzzleに変更
-    working-directory: puzzle
+# defaults:
+#   run:
+#     # ワークフローの作業ディレクトリをpuzzleに変更
+#     working-directory: puzzle
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        # ワークフローの作業ディレクトリをpuzzleに変更
+        working-directory: puzzle
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
@@ -23,6 +27,10 @@ jobs:
   build-android:
     needs: test
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        # ワークフローの作業ディレクトリをpuzzleに変更
+        working-directory: puzzle
     # environment:
     #   name: PuzzleAppEnv
     steps:
@@ -61,6 +69,10 @@ jobs:
   build-ios:
     needs: test
     runs-on: macos-latest
+    defaults:
+      run:
+        # ワークフローの作業ディレクトリをpuzzleに変更
+        working-directory: puzzle
     # environment:
     #   name: PuzzleAppEnv
     steps:
@@ -120,7 +132,7 @@ jobs:
         run: |
           # Check working-directory
           pwd
-          
+
           # Install firebase
           curl -sL https://firbase.tools | bash
 
