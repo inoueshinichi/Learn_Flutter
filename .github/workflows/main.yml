@@ -127,11 +127,12 @@ jobs:
         uses: actions/download-artifact@v3  
         with:
           name: android-apk
-      - name: Get firebase token
+      - name: Test deploy with firebase
         # shell: bash
         run: |
           # Check working-directory
           pwd
+          echo "${{ github.workspace }}"
 
           # Install firebase
           curl -sL https://firbase.tools | bash
@@ -153,11 +154,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ios-ipa
-      - name: Get firebase token
+      - name: Test deploy with firebase
         # shell: bash
         run: |
           # Check working-directory
           pwd
+          echo "${{ github.workspace }}"
 
           # Install Firebase
           curl -sL https://firebase.tools | bash
