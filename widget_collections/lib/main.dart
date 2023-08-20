@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'basic_widgets.dart';
+import 'basic/basic_widgets.dart';
+import 'single_child_layout/single_child_layout_widgets.dart';
 
 void main() {
   runApp(const WidgetCollectionsApp());
@@ -22,6 +23,21 @@ class WidgetCollectionsApp extends StatelessWidget {
   }
 }
 
+/* 画面遷移(ナビゲーション) */
+void routingBasicWidgetsPage(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => BasicWidgetsPage()),
+  );
+}
+
+void routingSingleChildLayoutWidgetsPage(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => SingleChildLayoutWidgetsPage()),
+  );
+}
+
 class StartPage extends StatelessWidget {
   const StartPage({Key? key}) : super(key: key);
 
@@ -36,16 +52,8 @@ class StartPage extends StatelessWidget {
   }
 }
 
-/* 画面遷移(ナビゲーション) */
-void routingBasicWidgetsPage(BuildContext context) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => BasicWidgetsPage()),
-  );
-}
-
 class GridMenuView extends StatelessWidget {
-  GridMenuView({Key? key}) : super(key: key);
+  const GridMenuView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +76,7 @@ class GridMenuView extends StatelessWidget {
           child: const Text('A'),
         ),
         ElevatedButton(
-          onPressed: () => {},
+          onPressed: () => routingSingleChildLayoutWidgetsPage(context),
           child: const Text('B'),
         ),
         ElevatedButton(

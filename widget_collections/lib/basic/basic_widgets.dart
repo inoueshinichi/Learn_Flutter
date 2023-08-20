@@ -1,6 +1,6 @@
-import 'dart:async';
-import 'dart:ffi';
-import 'dart:typed_data';
+// import 'dart:async';
+// import 'dart:ffi';
+// import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -34,6 +34,15 @@ class _BasicWidgetsPageState extends State<BasicWidgetsPage> {
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     // final titleStyle = textTheme.title.copyWith(color: theme.backgroundColor);
+
+    // MediaQuery : 端末の情報を返す
+    var mediaQuery = MediaQuery.of(context);
+    if (mediaQuery.orientation == Orientation.landscape) {
+      // landspace(横)
+      // 必要な処理
+    } else {
+      // other
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -133,6 +142,12 @@ class _BasicWidgetsPageState extends State<BasicWidgetsPage> {
                     fit: BoxFit.contain,
                   ),
             Spacer(),
+            // アイコン
+            Icon(
+              Icons.insert_emoticon,
+              color: Colors.pink,
+              size: 30,
+            ),
           ],
         ),
       ),
