@@ -9,3 +9,10 @@ __pycache__/
 android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
 
+# CMake
+dart_tutorial/hello_library/CMakeFiles
+dart_tutorial/primitives_library/CMakeFiles
+dart_tutorial/struct_library/CMakeFiles
+dart_tutorial/*/cmake_install.cmake
+dart_tutorial/*/CMakeCache.txt
+

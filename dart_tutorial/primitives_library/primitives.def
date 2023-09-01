@@ -1,0 +1,7 @@
+LIBRARY structs
+EXPORTS
+    sum
+    sub
+    mul
+    free_ptr
+
