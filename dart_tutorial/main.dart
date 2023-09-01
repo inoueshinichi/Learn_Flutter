@@ -65,6 +65,49 @@ typedef Mul = ffi.Pointer<ffi.Int32> Function(int a, int b);
 typedef FreePtrFunc = ffi.Void Function(ffi.Pointer<ffi.Int32> a);
 typedef FreePtr = void Function(ffi.Pointer<ffi.Int32> a);
 
+/* C struct bandle */
+class Coordinate extends ffi.Struct {
+  @ffi.Double()
+  external double latitude;
+
+  @ffi.Double()
+  external double longitude;
+}
+
+class Place extends ffi.Struct {
+  external ffi.Pointer<Utf8> name;
+  external Coordinate coordinate;
+}
+
+// char *hello_place()
+// CとDartの両方の関数で同じシグネチャを持つ
+typedef HelloPlace = ffi.Pointer<Utf8> Function();
+
+// char *reverse(char *str, int length)
+typedef ReverseNative = ffi.Pointer<Utf8> Function(
+    ffi.Pointer<Utf8> str, ffi.Int32 length);
+typedef Reverse = ffi.Pointer<Utf8> Function(ffi.Pointer<Utf8> str, int length);
+
+// void free_string(char *str)
+typedef FreeStringNative = ffi.Void Function(ffi.Pointer<Utf8> str);
+typedef FreeString = void Function(ffi.Pointer<Utf8> str);
+
+// struct Coordinate create_coordinate(double latitude, double longitude)
+typedef CreateCoordinateNative = Coordinate Function(
+    ffi.Double latitude, ffi.Double longitude);
+typedef CreateCoordinate = Coordinate Function(
+    double latitude, double longitude);
+
+// struct Place create_place(char *name, double latitude, double longitude)
+typedef CreatePlaceNative = Place Function(
+    ffi.Pointer<Utf8> name, ffi.Double latitude, ffi.Double longitude);
+typedef CreatePlace = Place Function(
+    ffi.Pointer<Utf8> name, double latitude, double longitude);
+
+// double distance(struct Coordinate, struct Coordinate)
+typedef DistanceNative = ffi.Double Function(Coordinate p1, Coordinate p2);
+typedef Distance = double Function(Coordinate p1, Coordinate p2);
+
 void main() {
   // hello_library
   {
@@ -138,6 +181,62 @@ void main() {
 
   // struct_library
   {
-    
+    // 動的リンクライブラリのパスを取得
+    var libraryPath =
+        path.join(Directory.current.path, 'struct_library', 'libstruct.so');
+    if (Platform.isMacOS) {
+      libraryPath = path.join(
+          Directory.current.path, 'struct_library', 'libstruct.dylib');
+    } else if (Platform.isWindows) {
+      libraryPath = path.join(
+          Directory.current.path, 'struct_library', 'Debug', 'struct.dll');
+    }
+
+    // 動的リンクライブラリの読み込み
+    final dylib = ffi.DynamicLibrary.open(libraryPath);
+
+    final helloPlace =
+        dylib.lookupFunction<HelloPlace, HelloPlace>('hello_place');
+    final message =
+        helloPlace().toDartString(); // ffi.Pointer<Utf8> -> Dart String
+    print(message);
+
+    final reverse = dylib.lookupFunction<ReverseNative, Reverse>('reverse');
+    final backwards = 'backwards'; // utf16
+    final backwardUtf8 = backwards.toNativeUtf8(); // utf8
+    final reversedMessageUtf8 =
+        reverse(backwardUtf8, backwards.length); // char *reverse(char* str);
+    final reversedMessage = reversedMessageUtf8.toDartString(); // utf8 -> utf16
+    calloc.free(backwardUtf8);
+    print('${backwards} reversed is ${reversedMessage}');
+
+    final freeString =
+        dylib.lookupFunction<FreeStringNative, FreeString>('free_string');
+    freeString(reversedMessageUtf8);
+
+    final createCoordinate =
+        dylib.lookupFunction<CreateCoordinateNative, CreateCoordinate>(
+            'create_coordinate');
+    final coordinate = createCoordinate(3.5, 4.6);
+    print(
+        'Coordinate is lat ${coordinate.latitude}, long ${coordinate.longitude}');
+
+    final myHomeUtf8 = 'My Home'.toNativeUtf8();
+    final createPlace =
+        dylib.lookupFunction<CreatePlaceNative, CreatePlace>('create_place');
+
+    final place = createPlace(myHomeUtf8, 42.0, 24.0); // instantiate Place
+    final name = place.name.toDartString(); // utf8 -> utf16
+    calloc.free(myHomeUtf8);
+
+    final coord = place.coordinate;
+    print(
+        "The name of my place is $name at ${coord.latitude}, ${coord.longitude}");
+    final distance =
+        dylib.lookupFunction<DistanceNative, Distance>('distance');
+
+    final dist =
+        distance(createCoordinate(2.0, 2.0), createCoordinate(5.0, 6.0));
+    print('distance between (2,2) and (5,6) = $dist');
   }
 }
