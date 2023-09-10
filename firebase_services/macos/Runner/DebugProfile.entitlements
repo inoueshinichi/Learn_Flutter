@@ -8,5 +8,8 @@
 	<true/>
 	<key>com.apple.security.network.server</key>
 	<true/>
+	<!-- macOSにおけるネットワークアクセス許可の追加 -->
+	<key>com.apple.security.network.client</key>
+	<true/>
 </dict>
 </plist>
