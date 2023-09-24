@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'basic/basic_widgets.dart';
+
+// Flutter本 1
 import 'single_child_layout/single_child_layout_widgets.dart';
+
+// Flutter本 2(簡単な方)
+import 'flutter3_tutorial/flutter3_tutorial_layout_widgets.dart';
 
 void main() {
   runApp(const WidgetCollectionsApp());
@@ -35,6 +40,13 @@ void routingSingleChildLayoutWidgetsPage(BuildContext context) {
   Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => SingleChildLayoutWidgetsPage()),
+  );
+}
+
+void routingFlutter3TutorialLayoutWidgetsPage(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => Flutter3TutorialLayoutWidgetsPage()),
   );
 }
 
@@ -80,7 +92,7 @@ class GridMenuView extends StatelessWidget {
           child: const Text('B'),
         ),
         ElevatedButton(
-          onPressed: () => {},
+          onPressed: () => routingFlutter3TutorialLayoutWidgetsPage(context),
           child: const Text('C'),
         ),
         ElevatedButton(
